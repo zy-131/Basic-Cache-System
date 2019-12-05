@@ -1,5 +1,3 @@
-# HW4
-# Due Date: 12/01/2019, 11:59PM
 ########################################
 #                                      
 # Name: Zaid Yazadi
@@ -54,7 +52,6 @@ class CacheList():
     #             - evictionPolicy (str)
     # return Nothing
     def put(self, content, evictionPolicy):
-        # YOUR CODE STARTS HERE
         new = ContentNode(content)
         if self.remainingSize > new.value.size:
             new.next = self.head
@@ -83,7 +80,6 @@ class CacheList():
     # returns: - id-specific content
     #          - None (id not found)
     def find(self, cid):
-        # YOUR CODE STARTS HERE
         cur = self.head
         while cur and cur.value.cid != cid:
             cur = cur.next
@@ -92,7 +88,6 @@ class CacheList():
     # MRU Eviction algorithm that removes most recently used ContentNode (self.head)
     # returns Nothing
     def mruEvict(self):
-        # YOUR CODE STARTS HERE
         cur = self.head
         x = cur.value.size
         self.head, cur.next = self.head.next, None
@@ -102,7 +97,6 @@ class CacheList():
     # LRU Eviction algorithm that removes least recently used ContentNode (self.tail)
     # returns nothing
     def lruEvict(self):
-        # YOUR CODE STARTS HERE
         cur = self.head
         try:
             while cur.next != self.tail:
@@ -125,7 +119,6 @@ class CacheList():
     # Clears contents of list by removing head and tail values
     # return "Cleared cache!" message
     def clear(self):
-        # YOUR CODE STARTS HERE
         self.head = None
         self.tail = None
         self.remainingSize = self.maxSize
@@ -275,7 +268,6 @@ class Cache():
     # Collision is basically handled with separate chaining
     # returns sum % size (list index)
     def hashFunc(self, contentHeader):
-        # YOUR CODE STARTS HERE
         total = 0
         for c in contentHeader:
             total += ord(c)
@@ -288,7 +280,6 @@ class Cache():
     #          - Insertion not allowed due to size message
     #          - None (incorrect parameter type)
     def insert(self, content, evictionPolicy):
-        # YOUR CODE STARTS HERE
         if type(content) == ContentItem:
             if content.size <= 200:
                 self.hierarchy[self.hashFunc(content.header)].put(content, evictionPolicy)
@@ -303,7 +294,6 @@ class Cache():
     # returns: - specified content (if found)
     #          - "Cache miss!" message
     def retrieveContent(self, content):
-        # YOUR CODE STARTS HERE
         level = self.hashFunc(content.header)
         cur = self.hierarchy[level].head
         while cur and cur.value != content:
